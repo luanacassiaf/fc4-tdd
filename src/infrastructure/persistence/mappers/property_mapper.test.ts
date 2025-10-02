@@ -30,14 +30,21 @@ describe("PropertyMapper", () => {
 
 		expect(() => {
 			PropertyMapper.toDomain(propertyEntity);
-		}).toThrow("O nome é obrigatório");
+		}).toThrow("O nome da propriedade é obrigatório.");
 
 		propertyEntity.name = "Casa do Kame";
 		propertyEntity.maxGuests = 0;
 
 		expect(() => {
 			PropertyMapper.toDomain(propertyEntity);
-		}).toThrow("O número máximo de hóspedes deve ser maior que zero");
+		}).toThrow("A capacidade máxima deve ser maior que zero.");
+
+		propertyEntity.maxGuests = 6;
+		propertyEntity.basePricePerNight = 0;
+
+		expect(() => {
+			PropertyMapper.toDomain(propertyEntity);
+		}).toThrow("O preço base por noite é obrigatório.");
 	});
 
 	it("deve converter Property para PropertyEntity corretamente", () => {
